@@ -4,19 +4,19 @@ namespace Lab3
 {
     class AffineCalculations3D
     {
-        const int Size = 4;
+        const int matrixSize = 4;
 
-        public static Point3D[] Move(Point3D[] points, double x, double y, double z)
+        public static Point3D[] Move(Point3D[] points, float x, float y, float z)
         {
-            double[,] MoveMatrix = new double[Size, Size] { {1, 0, 0, x },
-                                                          {0, 1, 0, y },
-                                                          {0, 0, 1, z },
-                                                          {0, 0, 0, 1 }};
+            float[,] MoveMatrix = new float[matrixSize, matrixSize] { {1, 0, 0, x },
+                                                                      {0, 1, 0, y },
+                                                                      {0, 0, 1, z },
+                                                                      {0, 0, 0, 1 }};
 
             // Move
             for (int i = 0; i < points.Length; i++)
             {
-                double[] Vector = new double[Size] { points[i].X, points[i].Y, points[i].Z, 1 };
+                float[] Vector = new float[matrixSize] { points[i].X, points[i].Y, points[i].Z, 1 };
                 Vector = MatrixOnVector(MoveMatrix, Vector);
                 points[i].X = Vector[0];
                 points[i].Y = Vector[1];
@@ -26,20 +26,20 @@ namespace Lab3
             return points;
         }
 
-        public static Point3D[] Scale(Point3D[] points, double centerX, double centerY, double centerZ, double x, double y, double z)
+        public static Point3D[] Scale(Point3D[] points, Point3D center, float x, float y, float z)
         {
-            double[,] ScaleMatrix = new double[Size, Size] { {x, 0, 0, 0},
-                                                           {0, y, 0, 0},
-                                                           {0, 0, z, 0},
-                                                           {0, 0, 0, 1 } };
+            float[,] ScaleMatrix = new float[matrixSize, matrixSize] { {x, 0, 0, 0},
+                                                                       {0, y, 0, 0},
+                                                                       {0, 0, z, 0},
+                                                                       {0, 0, 0, 1 } };
 
-            // Move to (0, 0)
-            Move(points, -centerX, -centerY, -centerZ);
+            // Move to (0, 0, 0)
+            Move(points, -center.X, -center.Y, -center.Z);
 
             // Scale
             for (int i = 0; i < points.Length; i++)
             {
-                double[] Vector = new double[Size] { points[i].X, points[i].Y, points[i].Z, 1 };
+                float[] Vector = new float[matrixSize] { points[i].X, points[i].Y, points[i].Z, 1 };
                 Vector = MatrixOnVector(ScaleMatrix, Vector);
                 points[i].X = Vector[0];
                 points[i].Y = Vector[1];
@@ -47,29 +47,31 @@ namespace Lab3
             }
 
             // Move back
-            Move(points, centerX, centerY, centerZ);
+            Move(points, center.X, center.Y, center.Z);
 
             return points;
         }
 
-        public static Point3D[] RotateX(Point3D[] points, double centerX, double centerY, double centerZ, double angle)
+        public static Point3D[] RotateX(Point3D[] points, Point3D center, float angle)
         {
-            double[,] RotateMatrixX = new double[Size, Size] { {1, 0, 0, 0},
-                                                             {0, Math.Cos(angle), -Math.Sin(angle), 0},
-                                                             {0, Math.Sin(angle), Math.Cos(angle), 0},
-                                                             {0, 0, 0, 1 } };
-
             // Convert to Radians
-            angle = (angle * Math.PI) / 180;
+            angle = (float)(angle * Math.PI) / 180;
+            float Cos = (float)Math.Cos(angle);
+            float Sin = (float)Math.Sin(angle);
 
-            // Move to (0, 0)
-            Move(points, -centerX, -centerY, -centerZ);
+            float[,] RotateMatrixX = new float[matrixSize, matrixSize] { {1, 0, 0, 0},
+                                                                         {0, Cos, -Sin, 0},
+                                                                         {0, Sin, Cos, 0},
+                                                                         {0, 0, 0, 1 } };
+
+            // Move to (0, 0, 0)
+            Move(points, -center.X, -center.Y, -center.Z);
 
 
-            // Rotate
+            // Rotate OX
             for (int i = 0; i < points.Length; i++)
             {
-                double[] Vector = new double[Size] { points[i].X, points[i].Y, points[i].Z, 1 };
+                float[] Vector = new float[matrixSize] { points[i].X, points[i].Y, points[i].Z, 1 };
                 Vector = MatrixOnVector(RotateMatrixX, Vector);
                 points[i].X = Vector[0];
                 points[i].Y = Vector[1];
@@ -77,79 +79,85 @@ namespace Lab3
             }
 
             // Move back
-            Move(points, centerX, centerY, centerZ);
+            Move(points, center.X, center.Y, center.Z);
 
             return points;
         }
 
-        public static Point3D[] RotateY(Point3D[] points, double centerX, double centerY, double centerZ, double angle)
+        public static Point3D[] RotateY(Point3D[] points, Point3D center, float angle)
         {
-            double[,] RotateMatrixX = new double[Size, Size] { {Math.Cos(angle), 0, -Math.Sin(angle), 0},
-                                                               {0, 1, 0, 0},
-                                                               {Math.Sin(angle), 0, Math.Cos(angle), 0},
-                                                               {0, 0, 0, 1 } };
 
             // Convert to Radians
-            angle = (angle * Math.PI) / 180;
+            angle = (float)(angle * Math.PI) / 180;
+            float Cos = (float)Math.Cos(angle);
+            float Sin = (float)Math.Sin(angle);
 
-            // Move to (0, 0)
-            Move(points, -centerX, -centerY, -centerZ);
+            float[,] RotateMatrixY = new float[matrixSize, matrixSize] { {Cos, 0, -Sin, 0},
+                                                                         {0, 1, 0, 0},
+                                                                         {Sin, 0, Cos, 0},
+                                                                         {0, 0, 0, 1 } };
+
+            // Move to (0, 0, 0)
+            Move(points, -center.X, -center.Y, -center.Z);
 
 
-            // Rotate
+            // Rotate OY
             for (int i = 0; i < points.Length; i++)
             {
-                double[] Vector = new double[Size] { points[i].X, points[i].Y, points[i].Z, 1 };
-                Vector = MatrixOnVector(RotateMatrixX, Vector);
+                float[] Vector = new float[matrixSize] { points[i].X, points[i].Y, points[i].Z, 1 };
+                Vector = MatrixOnVector(RotateMatrixY, Vector);
                 points[i].X = Vector[0];
                 points[i].Y = Vector[1];
                 points[i].Z = Vector[1];
             }
 
             // Move back
-            Move(points, centerX, centerY, centerZ);
+            Move(points, center.X, center.Y, center.Z);
 
             return points;
         }
 
-        public static Point3D[] RotateZ(Point3D[] points, double centerX, double centerY, double centerZ, double angle)
+        public static Point3D[] RotateZ(Point3D[] points, Point3D center, float angle)
         {
-            double[,] RotateMatrixX = new double[Size, Size] { {Math.Cos(angle), -Math.Sin(angle), 0, 0},
-                                                               {Math.Sin(angle), Math.Cos(angle), 0, 0},
-                                                               {0, 0, 1, 0},
-                                                               {0, 0, 0, 1 } };
-
             // Convert to Radians
-            angle = (angle * Math.PI) / 180;
+            angle = (float)(angle * Math.PI) / 180;
+            float Cos = (float)Math.Cos(angle);
+            float Sin = (float)Math.Sin(angle);
 
-            // Move to (0, 0)
-            Move(points, -centerX, -centerY, -centerZ);
+            float[,] RotateMatrixZ = new float[matrixSize, matrixSize] { {Cos, -Sin, 0, 0},
+                                                                         {Sin, Cos, 0, 0},
+                                                                         {0, 0, 1, 0},
+                                                                         {0, 0, 0, 1 } };
 
 
-            // Rotate
+            // Move to (0, 0, 0)
+            Move(points, -center.X, -center.Y, -center.Z);
+
+
+            // Rotate OZ
             for (int i = 0; i < points.Length; i++)
             {
-                double[] Vector = new double[Size] { points[i].X, points[i].Y, points[i].Z, 1 };
-                Vector = MatrixOnVector(RotateMatrixX, Vector);
+                float[] Vector = new float[matrixSize] { points[i].X, points[i].Y, points[i].Z, 1 };
+                Vector = MatrixOnVector(RotateMatrixZ, Vector);
                 points[i].X = Vector[0];
                 points[i].Y = Vector[1];
                 points[i].Z = Vector[1];
             }
 
             // Move back
-            Move(points, centerX, centerY, centerZ);
+            Move(points, center.X, center.Y, center.Z);
 
             return points;
         }
 
-        private static double[] MatrixOnVector(double[,] Matrix, double[] Vector)
+        private static float[] MatrixOnVector(float[,] Matrix, float[] Vector)
         {
-            double[] NewVector = new double[Size];
+            float[] NewVector = new float[matrixSize];
 
-            for (int i = 0; i < Size; i++)
+            for (int i = 0; i < matrixSize; i++)
             {
-                double Sum = 0;
-                for (int j = 0; j < Size; j++)
+                float Sum = 0;
+                for (int j = 0; j < matrixSize; j++)
                 {
                     Sum += Vector[j] * Matrix[i, j];
                 }

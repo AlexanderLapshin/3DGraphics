@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using Lab3.Figures;
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Lab3
@@ -19,11 +14,8 @@ namespace Lab3
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            //Sun.Draw(Brushes.Yellow, e);
-            //Sea.Draw(Brushes.Blue, e);
-            //Iceberg.Draw(Brushes.White, e);
-            //Paluba.Draw(Brushes.Gray, e);
-            //Corma.Draw(Brushes.Black, e);
+            Cylinder cylinder = new Cylinder(new Point3D(400, 400, 50), new Point3D(400, 200, 50), 20);
+            cylinder.DrawXY(Brushes.Yellow, e);
             pictureBox1.BackColor = Color.AliceBlue;
         }
 
@@ -39,7 +31,7 @@ namespace Lab3
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (checkBoxRectangle1.Checked || checkBoxTriangle1.Checked || checkBoxTrapeze1.Checked || checkBoxCircle1.Checked)
+            if (comboBoxView.SelectedIndex >= 0)
             {
                 switch (e.KeyCode)
                 {
