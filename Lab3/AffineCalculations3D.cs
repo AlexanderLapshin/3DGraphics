@@ -6,6 +6,26 @@ namespace Lab3
     {
         const int matrixSize = 4;
 
+        public static Point3D[] ToIsometry(Point3D[] points)
+        {
+            float[,] IsometryMatrix = new float[matrixSize, matrixSize] { {0.707f, -0.408f, 0, 0 },
+                                                                          {0, 0.816f, 0, 0 },
+                                                                          {-0.707f, 0, 0.408f, 0 },
+                                                                          {0, 0, 0, 1 }};
+
+            // Transform
+            for (int i = 0; i < points.Length; i++)
+            {
+                float[] Vector = new float[matrixSize] { points[i].X, points[i].Y, points[i].Z, 1 };
+                Vector = MatrixOnVector(IsometryMatrix, Vector);
+                points[i].X = Vector[0];
+                points[i].Y = Vector[1];
+                points[i].Z = Vector[2];
+            }
+
+            return points;
+        }
+
         public static Point3D[] Move(Point3D[] points, float x, float y, float z)
         {
             float[,] MoveMatrix = new float[matrixSize, matrixSize] { {1, 0, 0, x },
@@ -75,7 +95,7 @@ namespace Lab3
                 Vector = MatrixOnVector(RotateMatrixX, Vector);
                 points[i].X = Vector[0];
                 points[i].Y = Vector[1];
-                points[i].Z = Vector[1];
+                points[i].Z = Vector[2];
             }
 
             // Move back
@@ -108,7 +128,7 @@ namespace Lab3
                 Vector = MatrixOnVector(RotateMatrixY, Vector);
                 points[i].X = Vector[0];
                 points[i].Y = Vector[1];
-                points[i].Z = Vector[1];
+                points[i].Z = Vector[2];
             }
 
             // Move back
@@ -141,7 +161,7 @@ namespace Lab3
                 Vector = MatrixOnVector(RotateMatrixZ, Vector);
                 points[i].X = Vector[0];
                 points[i].Y = Vector[1];
-                points[i].Z = Vector[1];
+                points[i].Z = Vector[2];
             }
 
             // Move back

@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace Lab3.Figures
@@ -8,58 +7,57 @@ namespace Lab3.Figures
     {
         protected Point3D[] points;
         protected int pointsLength;
-        protected Point3D center;
+        protected Point3D center = new Point3D();
         protected int angleX = 0;
         protected int angleY = 0;
         protected int angleZ = 0;
-        protected int moveStep = 5;
+        protected int moveStep = 10;
 
-        public virtual void DrawXY(Brush Brush, PaintEventArgs e)
+        public virtual void DrawXY(Pen pen1, Pen pen2, PaintEventArgs e)
         {
-            GraphicsPath RectanglePath = new GraphicsPath();
             for (int i = 0; i < pointsLength - 1; i++)
             {
-                RectanglePath.AddLine(points[i].X, points[i].Y, points[i + 1].X, points[i + 1].Y);
+                e.Graphics.DrawLine(pen1, points[i].X, points[i].Y, points[i + 1].X, points[i + 1].Y);
             }
-            RectanglePath.AddLine(points[0].X, points[0].Y, points[pointsLength - 1].X, points[pointsLength - 1].Y);
-
-            e.Graphics.DrawPath(Pens.Black, RectanglePath);
-            e.Graphics.FillPath(Brush, RectanglePath);
+            e.Graphics.DrawLine(pen1, points[0].X, points[0].Y, points[pointsLength - 1].X, points[pointsLength - 1].Y);
         }
 
-        public virtual void DrawXZ(Brush Brush, PaintEventArgs e)
+        public virtual void DrawXZ(Pen pen1, Pen pen2, PaintEventArgs e)
         {
-            GraphicsPath RectanglePath = new GraphicsPath();
             for (int i = 0; i < pointsLength - 1; i++)
             {
-                RectanglePath.AddLine(points[i].X, points[i].Z, points[i + 1].X, points[i + 1].Z);
+                e.Graphics.DrawLine(pen1, points[i].X, points[i].Z, points[i + 1].X, points[i + 1].Z);
             }
-            RectanglePath.AddLine(points[0].X, points[0].Z, points[pointsLength - 1].X, points[pointsLength - 1].Z);
-
-            e.Graphics.DrawPath(Pens.Black, RectanglePath);
-            e.Graphics.FillPath(Brush, RectanglePath);
+            e.Graphics.DrawLine(pen1, points[0].X, points[0].Z, points[pointsLength - 1].X, points[pointsLength - 1].Z);
         }
 
-        public virtual void DrawYZ(Brush Brush, PaintEventArgs e)
+        public virtual void DrawYZ(Pen pen1, Pen pen2, PaintEventArgs e)
         {
-            GraphicsPath RectanglePath = new GraphicsPath();
             for (int i = 0; i < pointsLength - 1; i++)
             {
-                RectanglePath.AddLine(points[i].Y, points[i].Z, points[i + 1].Y, points[i + 1].Z);
+                e.Graphics.DrawLine(pen1, points[i].Y, points[i].Z, points[i + 1].Y, points[i + 1].Z);
             }
-            RectanglePath.AddLine(points[0].Y, points[0].Z, points[pointsLength - 1].Y, points[pointsLength - 1].Z);
-
-            e.Graphics.DrawPath(Pens.Black, RectanglePath);
-            e.Graphics.FillPath(Brush, RectanglePath);
+            e.Graphics.DrawLine(pen1, points[0].Y, points[0].Z, points[pointsLength - 1].Y, points[pointsLength - 1].Z);
         }
 
-        public virtual void Rotate(string direction)
+        public virtual void DrawIsometry(Pen pen1, Pen pen2, PaintEventArgs e)
+        {
+            points = AffineCalculations3D.ToIsometry(points);
+
+            for (int i = 0; i < pointsLength - 1; i++)
+            {
+                e.Graphics.DrawLine(pen1, points[i].X, points[i].Y, points[i + 1].X, points[i + 1].Y);
+            }
+            e.Graphics.DrawLine(pen1, points[0].X, points[0].Y, points[pointsLength - 1].X, points[pointsLength - 1].Y);
+        }
+
+        public virtual void Rotate(string direction, int angle)
         {
             switch (direction)
             {
                 case Constants.OXLEFT:
-                    angleX++;
-                    AffineCalculations3D.RotateX(points, center, 1);
+                    AffineCalculations3D.RotateX(points, center, angle - angleX);
+                    angleX++
                     break;
                 case Constants.OXRIGHT:
                     angleX--;
@@ -114,23 +112,13 @@ namespace Lab3.Figures
                     break;
             };
         }
-        public virtual void Increase(string Axis)
+        public virtual void Increase()
         {
-            switch (Axis)
-            {
-                case Constants.XYZ:
-                    AffineCalculations3D.Scale(points, center, (float)1.1, (float)1.1, (float)1.1);
-                    break;
-            }
+            AffineCalculations3D.Scale(points, center, (float)1.1, (float)1.1, (float)1.1);
         }
-        public virtual void Decrease(string Axis)
+        public virtual void Decrease()
         {
-            switch (Axis)
-            {
-                case Constants.XYZ:
-                    AffineCalculations3D.Scale(points, center, (float)0.9, (float)0.9, (float)0.9);
-                    break;
-            }
+            AffineCalculations3D.Scale(points, center, (float)0.9, (float)0.9, (float)0.9);
         }
     }
 }

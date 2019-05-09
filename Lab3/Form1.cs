@@ -10,13 +10,28 @@ namespace Lab3
         public Form1()
         {
             InitializeComponent();
+            pictureBox1.BackColor = Color.AliceBlue;
         }
 
+        Cylinder cylinder = new Cylinder(new Point3D(300, 0, 260), new Point3D(300, 100, 260), 50);
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            Cylinder cylinder = new Cylinder(new Point3D(400, 400, 50), new Point3D(400, 200, 50), 20);
-            cylinder.DrawXY(Brushes.Yellow, e);
-            pictureBox1.BackColor = Color.AliceBlue;
+            if (radioButtonFrontView.Checked)
+            {
+                cylinder.DrawXY(Pens.Red, Pens.Green, e);
+            }
+            else if (radioButtonViewAbove.Checked)
+            {
+                cylinder.DrawXZ(Pens.Red, Pens.Green, e);
+            }
+            else if (radioButtonViewSide.Checked)
+            {
+                cylinder.DrawYZ(Pens.Red, Pens.Green, e);
+            }
+            else if (radioButtonViewIsometry.Checked)
+            {
+                cylinder.DrawIsometry(Pens.Red, Pens.Green, e);
+            }
         }
 
         private void buttonBackgroundColor_Click(object sender, EventArgs e)
@@ -29,70 +44,113 @@ namespace Lab3
 
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        private void radioButtonFrontView_CheckedChanged(object sender, EventArgs e)
         {
-            if (comboBoxView.SelectedIndex >= 0)
+            cylinder = new Cylinder(new Point3D(200, 0, 150), new Point3D(200, 100, 150), 50);
+            pictureBox1.Refresh();
+        }
+
+        private void radioButtonViewAbove_CheckedChanged(object sender, EventArgs e)
+        {
+            cylinder = new Cylinder(new Point3D(200, 0, 150), new Point3D(200, 100, 150), 50);
+            pictureBox1.Refresh();
+        }
+
+        private void radioButtonViewSide_CheckedChanged(object sender, EventArgs e)
+        {
+            cylinder = new Cylinder(new Point3D(200, 0, 150), new Point3D(200, 100, 150), 50);
+            pictureBox1.Refresh();
+        }
+
+        private void radioButtonViewIsometry_CheckedChanged(object sender, EventArgs e)
+        {
+            cylinder = new Cylinder(new Point3D(200, 0, 150), new Point3D(200, 100, 150), 50);
+            pictureBox1.Refresh();
+        }
+
+        private void buttonMoveUp_Click(object sender, EventArgs e)
+        {
+            if (radioButtonFrontView.Checked)
             {
-                switch (e.KeyCode)
-                {
-                    case Keys.W:
-                        //if (checkBoxRectangle1.Checked) Paluba.Move(Constants.UP);
-                        //if (checkBoxTriangle1.Checked) Iceberg.Move(Constants.UP);
-                        //if (checkBoxTrapeze1.Checked) Corma.Move(Constants.UP);
-                        //if (checkBoxCircle1.Checked) Sun.Move(Constants.UP);
-                        pictureBox1.Refresh();
-                        break;
-                    case Keys.S:
-                        //if (checkBoxRectangle1.Checked) Paluba.Move(Constants.DOWN);
-                        //if (checkBoxTriangle1.Checked) Iceberg.Move(Constants.DOWN);
-                        //if (checkBoxTrapeze1.Checked) Corma.Move(Constants.DOWN);
-                        //if (checkBoxCircle1.Checked) Sun.Move(Constants.DOWN);
-                        pictureBox1.Refresh();
-                        break;
-                    case Keys.A:
-                        //if (checkBoxRectangle1.Checked) Paluba.Move(Constants.LEFT);
-                        //if (checkBoxTriangle1.Checked) Iceberg.Move(Constants.LEFT);
-                        //if (checkBoxTrapeze1.Checked) Corma.Move(Constants.LEFT);
-                        //if (checkBoxCircle1.Checked) Sun.Move(Constants.LEFT);
-                        pictureBox1.Refresh();
-                        break;
-                    case Keys.D:
-                        //if (checkBoxRectangle1.Checked) Paluba.Move(Constants.RIGHT);
-                        //if (checkBoxTriangle1.Checked) Iceberg.Move(Constants.RIGHT);
-                        //if (checkBoxTrapeze1.Checked) Corma.Move(Constants.RIGHT);
-                        //if (checkBoxCircle1.Checked) Sun.Move(Constants.RIGHT);
-                        pictureBox1.Refresh();
-                        break;
-                    case Keys.OemMinus:
-                        //if (checkBoxRectangle1.Checked) Paluba.Decrease(Constants.XY);
-                        //if (checkBoxTriangle1.Checked) Iceberg.Decrease(Constants.XY);
-                        //if (checkBoxTrapeze1.Checked) Corma.Decrease(Constants.XY);
-                        //if (checkBoxCircle1.Checked) Sun.Decrease(Constants.XY);
-                        pictureBox1.Refresh();
-                        break;
-                    case Keys.Oemplus:
-                        //if (checkBoxRectangle1.Checked) Paluba.Increase(Constants.XY);
-                        //if (checkBoxTriangle1.Checked) Iceberg.Increase(Constants.XY);
-                        //if (checkBoxTrapeze1.Checked) Corma.Increase(Constants.XY);
-                        //if (checkBoxCircle1.Checked) Sun.Increase(Constants.XY);
-                        pictureBox1.Refresh();
-                        break;
-                    case Keys.Q:
-                        //if (checkBoxRectangle1.Checked) Paluba.Rotate(Constants.LEFT);
-                        //if (checkBoxTriangle1.Checked) Iceberg.Rotate(Constants.LEFT);
-                        //if (checkBoxTrapeze1.Checked) Corma.Rotate(Constants.LEFT);
-                        //if (checkBoxCircle1.Checked) Sun.Rotate(Constants.LEFT);
-                        pictureBox1.Refresh();
-                        break;
-                    case Keys.E:
-                        //if (checkBoxRectangle1.Checked) Paluba.Rotate(Constants.RIGHT);
-                        //if (checkBoxTriangle1.Checked) Iceberg.Rotate(Constants.RIGHT);
-                        //if (checkBoxTrapeze1.Checked) Corma.Rotate(Constants.RIGHT);
-                        //if (checkBoxCircle1.Checked) Sun.Rotate(Constants.RIGHT);
-                        pictureBox1.Refresh();
-                        break;
-                }
+                cylinder.Move(Constants.UP);
             }
+            else if (radioButtonViewAbove.Checked)
+            {
+                cylinder.Move(Constants.BACK);
+            }
+            else if (radioButtonViewSide.Checked)
+            {
+                cylinder.Move(Constants.BACK);
+            }
+            pictureBox1.Refresh();
+        }
+
+        private void buttonMoveDown_Click(object sender, EventArgs e)
+        {
+            if (radioButtonFrontView.Checked)
+            {
+                cylinder.Move(Constants.DOWN);
+            }
+            else if (radioButtonViewAbove.Checked)
+            {
+                cylinder.Move(Constants.FORWARD);
+            }
+            else if (radioButtonViewSide.Checked)
+            {
+                cylinder.Move(Constants.FORWARD);
+            }
+            pictureBox1.Refresh();
+        }
+
+        private void buttonMoveLeft_Click(object sender, EventArgs e)
+        {
+            if (radioButtonFrontView.Checked)
+            {
+                cylinder.Move(Constants.LEFT);
+            }
+            else if (radioButtonViewAbove.Checked)
+            {
+                cylinder.Move(Constants.LEFT);
+            }
+            else if (radioButtonViewSide.Checked)
+            {
+                cylinder.Move(Constants.UP);
+            }
+            pictureBox1.Refresh();
+        }
+
+        private void buttonMoveRight_Click(object sender, EventArgs e)
+        {
+            if (radioButtonFrontView.Checked)
+            {
+                cylinder.Move(Constants.RIGHT);
+            }
+            else if (radioButtonViewAbove.Checked)
+            {
+                cylinder.Move(Constants.RIGHT);
+            }
+            else if (radioButtonViewSide.Checked)
+            {
+                cylinder.Move(Constants.DOWN);
+            }
+            pictureBox1.Refresh();
+        }
+
+        private void buttonScaleIncrease_Click(object sender, EventArgs e)
+        {
+            cylinder.Increase();
+            pictureBox1.Refresh();
+        }
+
+        private void buttonScaleDecrease_Click(object sender, EventArgs e)
+        {
+            cylinder.Decrease();
+            pictureBox1.Refresh();
+        }
+
+        private void trackBarRotateOX_Scroll(object sender, EventArgs e)
+        {
+            cylinder.Rotate(Constants.OXLEFT);
         }
     }
 }

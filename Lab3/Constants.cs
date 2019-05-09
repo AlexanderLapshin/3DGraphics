@@ -14,7 +14,5 @@
         public const string RIGHT = "RIGHT";
         public const string BACK = "BACK";
         public const string FORWARD = "FORWARD";
-        public const string XYZ = "XYZ";
-
     }
 }
