@@ -6,11 +6,11 @@ namespace Lab3
     {
         const int matrixSize = 4;
 
-        public static Point3D[] ToIsometry(Point3D[] points)
+        public static Point3D[] ToIsometry(Point3D[] points, Point3D center)
         {
             float[,] IsometryMatrix = new float[matrixSize, matrixSize] { {0.707f, -0.408f, 0, 0 },
                                                                           {0, 0.816f, 0, 0 },
-                                                                          {-0.707f, 0, 0.408f, 0 },
+                                                                          {-0.707f,  0.408f, 1, 0 },
                                                                           {0, 0, 0, 1 }};
 
             // Transform
@@ -22,6 +22,13 @@ namespace Lab3
                 points[i].Y = Vector[1];
                 points[i].Z = Vector[2];
             }
+
+            // Transform center
+            float[] Vector2 = new float[matrixSize] { center.X, center.Y, center.Z, 1 };
+            Vector2 = MatrixOnVector(IsometryMatrix, Vector2);
+            center.X = Vector2[0];
+            center.Y = Vector2[1];
+            center.Z = Vector2[2];
 
             return points;
         }

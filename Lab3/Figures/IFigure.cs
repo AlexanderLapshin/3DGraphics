@@ -12,6 +12,7 @@ namespace Lab3.Figures
         protected int angleY = 0;
         protected int angleZ = 0;
         protected int moveStep = 10;
+        protected bool isometry = false;
 
         public virtual void DrawXY(Pen pen1, Pen pen2, PaintEventArgs e)
         {
@@ -42,7 +43,7 @@ namespace Lab3.Figures
 
         public virtual void DrawIsometry(Pen pen1, Pen pen2, PaintEventArgs e)
         {
-            points = AffineCalculations3D.ToIsometry(points);
+            points = AffineCalculations3D.ToIsometry(points, center);
 
             for (int i = 0; i < pointsLength - 1; i++)
             {

@@ -10,27 +10,35 @@ namespace Lab3
         public Form1()
         {
             InitializeComponent();
-            pictureBox1.BackColor = Color.AliceBlue;
+            pictureBoxFigure.BackColor = Color.AliceBlue;
+            pictureBoxPlane.BackColor = Color.AliceBlue;
         }
 
+        //###########
+        // Figure Code
+        //###########
+
         Cylinder cylinder = new Cylinder(new Point3D(300, 0, 260), new Point3D(300, 100, 260), 50);
+        Pen MainPen = new Pen(Color.Red, 2);
+        Pen SecondaryPen = new Pen(Color.Green, 2);
+
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             if (radioButtonFrontViewFigure.Checked)
             {
-                cylinder.DrawXY(Pens.Red, Pens.Green, e);
+                cylinder.DrawXY(MainPen, SecondaryPen, e);
             }
             else if (radioButtonViewAboveFigure.Checked)
             {
-                cylinder.DrawXZ(Pens.Red, Pens.Green, e);
+                cylinder.DrawXZ(MainPen, SecondaryPen, e);
             }
             else if (radioButtonViewSideFigure.Checked)
             {
-                cylinder.DrawYZ(Pens.Red, Pens.Green, e);
+                cylinder.DrawYZ(MainPen, SecondaryPen, e);
             }
             else if (radioButtonViewIsometryFigure.Checked)
             {
-                cylinder.DrawIsometry(Pens.Red, Pens.Green, e);
+                cylinder.DrawIsometry(MainPen, SecondaryPen, e);
             }
         }
 
@@ -39,33 +47,44 @@ namespace Lab3
             DialogResult result = colorDialog1.ShowDialog();
             if (result == DialogResult.OK)
             {
-                pictureBox1.BackColor = colorDialog1.Color;
+                pictureBoxFigure.BackColor = colorDialog1.Color;
             }
-
         }
 
         private void radioButtonFrontView_CheckedChanged(object sender, EventArgs e)
         {
+            trackBarRotateOXFigure.Value = 0;
+            trackBarRotateOYFigure.Value = 0;
+            trackBarRotateOZFigure.Value = 0;
             cylinder = new Cylinder(new Point3D(200, 0, 150), new Point3D(200, 100, 150), 50);
-            pictureBox1.Refresh();
+            pictureBoxFigure.Refresh();
         }
 
         private void radioButtonViewAbove_CheckedChanged(object sender, EventArgs e)
         {
+            trackBarRotateOXFigure.Value = 0;
+            trackBarRotateOYFigure.Value = 0;
+            trackBarRotateOZFigure.Value = 0;
             cylinder = new Cylinder(new Point3D(200, 0, 150), new Point3D(200, 100, 150), 50);
-            pictureBox1.Refresh();
+            pictureBoxFigure.Refresh();
         }
 
         private void radioButtonViewSide_CheckedChanged(object sender, EventArgs e)
         {
+            trackBarRotateOXFigure.Value = 0;
+            trackBarRotateOYFigure.Value = 0;
+            trackBarRotateOZFigure.Value = 0;
             cylinder = new Cylinder(new Point3D(200, 0, 150), new Point3D(200, 100, 150), 50);
-            pictureBox1.Refresh();
+            pictureBoxFigure.Refresh();
         }
 
         private void radioButtonViewIsometry_CheckedChanged(object sender, EventArgs e)
         {
+            trackBarRotateOXFigure.Value = 0;
+            trackBarRotateOYFigure.Value = 0;
+            trackBarRotateOZFigure.Value = 0;
             cylinder = new Cylinder(new Point3D(200, 0, 150), new Point3D(200, 100, 150), 50);
-            pictureBox1.Refresh();
+            pictureBoxFigure.Refresh();
         }
 
         private void buttonMoveUp_Click(object sender, EventArgs e)
@@ -82,7 +101,11 @@ namespace Lab3
             {
                 cylinder.Move(Constants.BACK);
             }
-            pictureBox1.Refresh();
+            else if (radioButtonViewIsometryFigure.Checked)
+            {
+                cylinder.Move(Constants.UP);
+            }
+            pictureBoxFigure.Refresh();
         }
 
         private void buttonMoveDown_Click(object sender, EventArgs e)
@@ -99,7 +122,11 @@ namespace Lab3
             {
                 cylinder.Move(Constants.FORWARD);
             }
-            pictureBox1.Refresh();
+            else if (radioButtonViewIsometryFigure.Checked)
+            {
+                cylinder.Move(Constants.DOWN);
+            }
+            pictureBoxFigure.Refresh();
         }
 
         private void buttonMoveLeft_Click(object sender, EventArgs e)
@@ -116,7 +143,11 @@ namespace Lab3
             {
                 cylinder.Move(Constants.UP);
             }
-            pictureBox1.Refresh();
+            else if (radioButtonViewIsometryFigure.Checked)
+            {
+                cylinder.Move(Constants.LEFT);
+            }
+            pictureBoxFigure.Refresh();
         }
 
         private void buttonMoveRight_Click(object sender, EventArgs e)
@@ -133,37 +164,56 @@ namespace Lab3
             {
                 cylinder.Move(Constants.DOWN);
             }
-            pictureBox1.Refresh();
+            else if (radioButtonViewIsometryFigure.Checked)
+            {
+                cylinder.Move(Constants.RIGHT);
+            }
+            pictureBoxFigure.Refresh();
         }
 
         private void buttonScaleIncrease_Click(object sender, EventArgs e)
         {
             cylinder.Increase();
-            pictureBox1.Refresh();
+            pictureBoxFigure.Refresh();
         }
 
         private void buttonScaleDecrease_Click(object sender, EventArgs e)
         {
             cylinder.Decrease();
-            pictureBox1.Refresh();
+            pictureBoxFigure.Refresh();
         }
 
         private void trackBarRotateOX_Scroll(object sender, EventArgs e)
         {
             cylinder.Rotate(Constants.OX, trackBarRotateOXFigure.Value);
-            pictureBox1.Refresh();
+            pictureBoxFigure.Refresh();
         }
 
         private void trackBarRotateOY_Scroll(object sender, EventArgs e)
         {
             cylinder.Rotate(Constants.OY, trackBarRotateOYFigure.Value);
-            pictureBox1.Refresh();
+            pictureBoxFigure.Refresh();
         }
 
         private void trackBarRotateOZ_Scroll(object sender, EventArgs e)
         {
             cylinder.Rotate(Constants.OZ, trackBarRotateOZFigure.Value);
-            pictureBox1.Refresh();
+            pictureBoxFigure.Refresh();
+        }
+
+
+
+        //###########
+        // Plane Code
+        //###########
+
+        private void buttonBackgroundColorPlane_Click(object sender, EventArgs e)
+        {
+            DialogResult result = colorDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                pictureBoxPlane.BackColor = colorDialog1.Color;
+            }
         }
     }
 }

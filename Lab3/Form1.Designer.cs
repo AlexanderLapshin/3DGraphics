@@ -53,18 +53,29 @@
             this.radioButtonViewAboveFigure = new System.Windows.Forms.RadioButton();
             this.radioButtonFrontViewFigure = new System.Windows.Forms.RadioButton();
             this.buttonBackground = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxFigure = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.buttonResetPlane = new System.Windows.Forms.Button();
+            this.buttonLineColorPlane = new System.Windows.Forms.Button();
+            this.buttonBackgroundColorPlane = new System.Windows.Forms.Button();
+            this.groupBoxRotatePlane = new System.Windows.Forms.GroupBox();
+            this.trackBarRotateOZPlane = new System.Windows.Forms.TrackBar();
+            this.trackBarRotateOYPlane = new System.Windows.Forms.TrackBar();
+            this.trackBarRotateOXPlane = new System.Windows.Forms.TrackBar();
+            this.labelRotateOZPlane = new System.Windows.Forms.Label();
+            this.labelRotateOYPlane = new System.Windows.Forms.Label();
+            this.labelRotateOXPlane = new System.Windows.Forms.Label();
             this.groupBoxScalePlane = new System.Windows.Forms.GroupBox();
+            this.buttonScaleDecreasePlane = new System.Windows.Forms.Button();
+            this.buttonScaleIncreasePlane = new System.Windows.Forms.Button();
             this.groupBoxMovePlane = new System.Windows.Forms.GroupBox();
             this.buttonMoveRightPlane = new System.Windows.Forms.Button();
             this.buttonMoveDownPlane = new System.Windows.Forms.Button();
             this.buttonMoveLeftPlane = new System.Windows.Forms.Button();
             this.buttonMoveUpPlane = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.dataGridViewPlane = new System.Windows.Forms.DataGridView();
+            this.pictureBoxPlane = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -78,15 +89,20 @@
             this.groupBoxScaleFigure.SuspendLayout();
             this.groupBoxMoveFigure.SuspendLayout();
             this.groupBoxViewFigure.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFigure)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.groupBoxRotatePlane.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarRotateOZPlane)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarRotateOYPlane)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarRotateOXPlane)).BeginInit();
+            this.groupBoxScalePlane.SuspendLayout();
             this.groupBoxMovePlane.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPlane)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlane)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -128,7 +144,7 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.pictureBox1);
+            this.splitContainer1.Panel2.Controls.Add(this.pictureBoxFigure);
             this.splitContainer1.Size = new System.Drawing.Size(874, 521);
             this.splitContainer1.SplitterDistance = 279;
             this.splitContainer1.TabIndex = 0;
@@ -232,7 +248,7 @@
             // 
             this.buttonScaleDecreaseFigure.BackColor = System.Drawing.Color.WhiteSmoke;
             this.buttonScaleDecreaseFigure.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonScaleDecreaseFigure.Location = new System.Drawing.Point(155, 42);
+            this.buttonScaleDecreaseFigure.Location = new System.Drawing.Point(165, 38);
             this.buttonScaleDecreaseFigure.Name = "buttonScaleDecreaseFigure";
             this.buttonScaleDecreaseFigure.Size = new System.Drawing.Size(85, 28);
             this.buttonScaleDecreaseFigure.TabIndex = 1;
@@ -244,7 +260,7 @@
             // 
             this.buttonScaleIncreaseFigure.BackColor = System.Drawing.Color.WhiteSmoke;
             this.buttonScaleIncreaseFigure.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonScaleIncreaseFigure.Location = new System.Drawing.Point(29, 42);
+            this.buttonScaleIncreaseFigure.Location = new System.Drawing.Point(29, 38);
             this.buttonScaleIncreaseFigure.Name = "buttonScaleIncreaseFigure";
             this.buttonScaleIncreaseFigure.Size = new System.Drawing.Size(85, 28);
             this.buttonScaleIncreaseFigure.TabIndex = 0;
@@ -284,7 +300,7 @@
             // 
             this.buttonMoveLeft.BackColor = System.Drawing.Color.WhiteSmoke;
             this.buttonMoveLeft.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonMoveLeft.Location = new System.Drawing.Point(18, 62);
+            this.buttonMoveLeft.Location = new System.Drawing.Point(14, 62);
             this.buttonMoveLeft.Name = "buttonMoveLeft";
             this.buttonMoveLeft.Size = new System.Drawing.Size(75, 28);
             this.buttonMoveLeft.TabIndex = 2;
@@ -296,7 +312,7 @@
             // 
             this.buttonMoveRight.BackColor = System.Drawing.Color.WhiteSmoke;
             this.buttonMoveRight.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonMoveRight.Location = new System.Drawing.Point(195, 62);
+            this.buttonMoveRight.Location = new System.Drawing.Point(191, 62);
             this.buttonMoveRight.Name = "buttonMoveRight";
             this.buttonMoveRight.Size = new System.Drawing.Size(75, 28);
             this.buttonMoveRight.TabIndex = 1;
@@ -397,20 +413,19 @@
             this.buttonBackground.UseVisualStyleBackColor = true;
             this.buttonBackground.Click += new System.EventHandler(this.buttonBackgroundColor_Click);
             // 
-            // pictureBox1
+            // pictureBoxFigure
             // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(591, 521);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            this.pictureBoxFigure.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBoxFigure.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxFigure.Name = "pictureBoxFigure";
+            this.pictureBoxFigure.Size = new System.Drawing.Size(591, 521);
+            this.pictureBoxFigure.TabIndex = 0;
+            this.pictureBoxFigure.TabStop = false;
+            this.pictureBoxFigure.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
-            this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.splitContainer2);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -418,15 +433,6 @@
             this.tabPage2.Size = new System.Drawing.Size(880, 527);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Plane";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Location = new System.Drawing.Point(3, 230);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 100);
-            this.groupBox2.TabIndex = 4;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
             // 
             // splitContainer2
             // 
@@ -436,24 +442,177 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.buttonResetPlane);
+            this.splitContainer2.Panel1.Controls.Add(this.buttonLineColorPlane);
+            this.splitContainer2.Panel1.Controls.Add(this.buttonBackgroundColorPlane);
+            this.splitContainer2.Panel1.Controls.Add(this.groupBoxRotatePlane);
             this.splitContainer2.Panel1.Controls.Add(this.groupBoxScalePlane);
             this.splitContainer2.Panel1.Controls.Add(this.groupBoxMovePlane);
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.dataGridView1);
-            this.splitContainer2.Panel2.Controls.Add(this.pictureBox2);
+            this.splitContainer2.Panel2.Controls.Add(this.dataGridViewPlane);
+            this.splitContainer2.Panel2.Controls.Add(this.pictureBoxPlane);
             this.splitContainer2.Size = new System.Drawing.Size(874, 521);
             this.splitContainer2.SplitterDistance = 291;
             this.splitContainer2.TabIndex = 3;
             // 
+            // buttonResetPlane
+            // 
+            this.buttonResetPlane.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonResetPlane.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonResetPlane.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonResetPlane.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonResetPlane.ForeColor = System.Drawing.Color.OrangeRed;
+            this.buttonResetPlane.Location = new System.Drawing.Point(0, 475);
+            this.buttonResetPlane.Name = "buttonResetPlane";
+            this.buttonResetPlane.Size = new System.Drawing.Size(291, 43);
+            this.buttonResetPlane.TabIndex = 7;
+            this.buttonResetPlane.Text = "Reset";
+            this.buttonResetPlane.UseVisualStyleBackColor = false;
+            // 
+            // buttonLineColorPlane
+            // 
+            this.buttonLineColorPlane.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonLineColorPlane.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonLineColorPlane.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonLineColorPlane.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonLineColorPlane.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.buttonLineColorPlane.Location = new System.Drawing.Point(0, 443);
+            this.buttonLineColorPlane.Name = "buttonLineColorPlane";
+            this.buttonLineColorPlane.Size = new System.Drawing.Size(291, 32);
+            this.buttonLineColorPlane.TabIndex = 6;
+            this.buttonLineColorPlane.Text = "Line Color";
+            this.buttonLineColorPlane.UseVisualStyleBackColor = false;
+            // 
+            // buttonBackgroundColorPlane
+            // 
+            this.buttonBackgroundColorPlane.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonBackgroundColorPlane.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonBackgroundColorPlane.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonBackgroundColorPlane.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonBackgroundColorPlane.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.buttonBackgroundColorPlane.Location = new System.Drawing.Point(0, 411);
+            this.buttonBackgroundColorPlane.Name = "buttonBackgroundColorPlane";
+            this.buttonBackgroundColorPlane.Size = new System.Drawing.Size(291, 32);
+            this.buttonBackgroundColorPlane.TabIndex = 5;
+            this.buttonBackgroundColorPlane.Text = "Background Color";
+            this.buttonBackgroundColorPlane.UseVisualStyleBackColor = false;
+            this.buttonBackgroundColorPlane.Click += new System.EventHandler(this.buttonBackgroundColorPlane_Click);
+            // 
+            // groupBoxRotatePlane
+            // 
+            this.groupBoxRotatePlane.Controls.Add(this.trackBarRotateOZPlane);
+            this.groupBoxRotatePlane.Controls.Add(this.trackBarRotateOYPlane);
+            this.groupBoxRotatePlane.Controls.Add(this.trackBarRotateOXPlane);
+            this.groupBoxRotatePlane.Controls.Add(this.labelRotateOZPlane);
+            this.groupBoxRotatePlane.Controls.Add(this.labelRotateOYPlane);
+            this.groupBoxRotatePlane.Controls.Add(this.labelRotateOXPlane);
+            this.groupBoxRotatePlane.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBoxRotatePlane.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupBoxRotatePlane.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.groupBoxRotatePlane.Location = new System.Drawing.Point(0, 198);
+            this.groupBoxRotatePlane.Name = "groupBoxRotatePlane";
+            this.groupBoxRotatePlane.Size = new System.Drawing.Size(291, 213);
+            this.groupBoxRotatePlane.TabIndex = 4;
+            this.groupBoxRotatePlane.TabStop = false;
+            this.groupBoxRotatePlane.Text = "Rotate";
+            // 
+            // trackBarRotateOZPlane
+            // 
+            this.trackBarRotateOZPlane.BackColor = System.Drawing.Color.White;
+            this.trackBarRotateOZPlane.Location = new System.Drawing.Point(129, 152);
+            this.trackBarRotateOZPlane.Maximum = 360;
+            this.trackBarRotateOZPlane.Name = "trackBarRotateOZPlane";
+            this.trackBarRotateOZPlane.Size = new System.Drawing.Size(142, 45);
+            this.trackBarRotateOZPlane.TabIndex = 2;
+            this.trackBarRotateOZPlane.TickFrequency = 30;
+            this.trackBarRotateOZPlane.TickStyle = System.Windows.Forms.TickStyle.Both;
+            // 
+            // trackBarRotateOYPlane
+            // 
+            this.trackBarRotateOYPlane.BackColor = System.Drawing.Color.White;
+            this.trackBarRotateOYPlane.Location = new System.Drawing.Point(129, 90);
+            this.trackBarRotateOYPlane.Maximum = 360;
+            this.trackBarRotateOYPlane.Name = "trackBarRotateOYPlane";
+            this.trackBarRotateOYPlane.Size = new System.Drawing.Size(142, 45);
+            this.trackBarRotateOYPlane.TabIndex = 1;
+            this.trackBarRotateOYPlane.TickFrequency = 30;
+            this.trackBarRotateOYPlane.TickStyle = System.Windows.Forms.TickStyle.Both;
+            // 
+            // trackBarRotateOXPlane
+            // 
+            this.trackBarRotateOXPlane.BackColor = System.Drawing.Color.White;
+            this.trackBarRotateOXPlane.Location = new System.Drawing.Point(129, 28);
+            this.trackBarRotateOXPlane.Maximum = 360;
+            this.trackBarRotateOXPlane.Name = "trackBarRotateOXPlane";
+            this.trackBarRotateOXPlane.Size = new System.Drawing.Size(142, 45);
+            this.trackBarRotateOXPlane.TabIndex = 0;
+            this.trackBarRotateOXPlane.TickFrequency = 30;
+            this.trackBarRotateOXPlane.TickStyle = System.Windows.Forms.TickStyle.Both;
+            // 
+            // labelRotateOZPlane
+            // 
+            this.labelRotateOZPlane.AutoSize = true;
+            this.labelRotateOZPlane.Location = new System.Drawing.Point(15, 164);
+            this.labelRotateOZPlane.Name = "labelRotateOZPlane";
+            this.labelRotateOZPlane.Size = new System.Drawing.Size(82, 16);
+            this.labelRotateOZPlane.TabIndex = 5;
+            this.labelRotateOZPlane.Text = "Rotate OZ:";
+            // 
+            // labelRotateOYPlane
+            // 
+            this.labelRotateOYPlane.AutoSize = true;
+            this.labelRotateOYPlane.Location = new System.Drawing.Point(16, 103);
+            this.labelRotateOYPlane.Name = "labelRotateOYPlane";
+            this.labelRotateOYPlane.Size = new System.Drawing.Size(83, 16);
+            this.labelRotateOYPlane.TabIndex = 4;
+            this.labelRotateOYPlane.Text = "Rotate OY:";
+            // 
+            // labelRotateOXPlane
+            // 
+            this.labelRotateOXPlane.AutoSize = true;
+            this.labelRotateOXPlane.Location = new System.Drawing.Point(16, 43);
+            this.labelRotateOXPlane.Name = "labelRotateOXPlane";
+            this.labelRotateOXPlane.Size = new System.Drawing.Size(82, 16);
+            this.labelRotateOXPlane.TabIndex = 3;
+            this.labelRotateOXPlane.Text = "Rotate OX:";
+            // 
             // groupBoxScalePlane
             // 
-            this.groupBoxScalePlane.Location = new System.Drawing.Point(18, 121);
+            this.groupBoxScalePlane.Controls.Add(this.buttonScaleDecreasePlane);
+            this.groupBoxScalePlane.Controls.Add(this.buttonScaleIncreasePlane);
+            this.groupBoxScalePlane.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBoxScalePlane.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupBoxScalePlane.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.groupBoxScalePlane.Location = new System.Drawing.Point(0, 115);
             this.groupBoxScalePlane.Name = "groupBoxScalePlane";
-            this.groupBoxScalePlane.Size = new System.Drawing.Size(200, 100);
-            this.groupBoxScalePlane.TabIndex = 0;
+            this.groupBoxScalePlane.Size = new System.Drawing.Size(291, 83);
+            this.groupBoxScalePlane.TabIndex = 3;
             this.groupBoxScalePlane.TabStop = false;
+            this.groupBoxScalePlane.Text = "Scale";
+            // 
+            // buttonScaleDecreasePlane
+            // 
+            this.buttonScaleDecreasePlane.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonScaleDecreasePlane.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonScaleDecreasePlane.Location = new System.Drawing.Point(166, 42);
+            this.buttonScaleDecreasePlane.Name = "buttonScaleDecreasePlane";
+            this.buttonScaleDecreasePlane.Size = new System.Drawing.Size(85, 28);
+            this.buttonScaleDecreasePlane.TabIndex = 1;
+            this.buttonScaleDecreasePlane.Text = "Decrease";
+            this.buttonScaleDecreasePlane.UseVisualStyleBackColor = true;
+            // 
+            // buttonScaleIncreasePlane
+            // 
+            this.buttonScaleIncreasePlane.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonScaleIncreasePlane.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonScaleIncreasePlane.Location = new System.Drawing.Point(29, 42);
+            this.buttonScaleIncreasePlane.Name = "buttonScaleIncreasePlane";
+            this.buttonScaleIncreasePlane.Size = new System.Drawing.Size(85, 28);
+            this.buttonScaleIncreasePlane.TabIndex = 0;
+            this.buttonScaleIncreasePlane.Text = "Increase";
+            this.buttonScaleIncreasePlane.UseVisualStyleBackColor = true;
             // 
             // groupBoxMovePlane
             // 
@@ -486,7 +645,7 @@
             // 
             this.buttonMoveDownPlane.BackColor = System.Drawing.Color.WhiteSmoke;
             this.buttonMoveDownPlane.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonMoveDownPlane.Location = new System.Drawing.Point(103, 62);
+            this.buttonMoveDownPlane.Location = new System.Drawing.Point(106, 62);
             this.buttonMoveDownPlane.Name = "buttonMoveDownPlane";
             this.buttonMoveDownPlane.Size = new System.Drawing.Size(75, 28);
             this.buttonMoveDownPlane.TabIndex = 3;
@@ -508,30 +667,30 @@
             // 
             this.buttonMoveUpPlane.BackColor = System.Drawing.Color.WhiteSmoke;
             this.buttonMoveUpPlane.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonMoveUpPlane.Location = new System.Drawing.Point(103, 21);
+            this.buttonMoveUpPlane.Location = new System.Drawing.Point(106, 21);
             this.buttonMoveUpPlane.Name = "buttonMoveUpPlane";
             this.buttonMoveUpPlane.Size = new System.Drawing.Size(75, 28);
             this.buttonMoveUpPlane.TabIndex = 0;
             this.buttonMoveUpPlane.Text = "Up";
             this.buttonMoveUpPlane.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dataGridViewPlane
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 371);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(579, 150);
-            this.dataGridView1.TabIndex = 1;
+            this.dataGridViewPlane.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewPlane.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dataGridViewPlane.Location = new System.Drawing.Point(0, 371);
+            this.dataGridViewPlane.Name = "dataGridViewPlane";
+            this.dataGridViewPlane.Size = new System.Drawing.Size(579, 150);
+            this.dataGridViewPlane.TabIndex = 1;
             // 
-            // pictureBox2
+            // pictureBoxPlane
             // 
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(579, 374);
-            this.pictureBox2.TabIndex = 0;
-            this.pictureBox2.TabStop = false;
+            this.pictureBoxPlane.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictureBoxPlane.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxPlane.Name = "pictureBoxPlane";
+            this.pictureBoxPlane.Size = new System.Drawing.Size(579, 374);
+            this.pictureBoxPlane.TabIndex = 0;
+            this.pictureBoxPlane.TabStop = false;
             // 
             // Form1
             // 
@@ -561,15 +720,21 @@
             this.groupBoxMoveFigure.ResumeLayout(false);
             this.groupBoxViewFigure.ResumeLayout(false);
             this.groupBoxViewFigure.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFigure)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.groupBoxRotatePlane.ResumeLayout(false);
+            this.groupBoxRotatePlane.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarRotateOZPlane)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarRotateOYPlane)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarRotateOXPlane)).EndInit();
+            this.groupBoxScalePlane.ResumeLayout(false);
             this.groupBoxMovePlane.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPlane)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlane)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -579,7 +744,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBoxFigure;
         private System.Windows.Forms.Button buttonBackground;
         private System.Windows.Forms.GroupBox groupBoxViewFigure;
         private System.Windows.Forms.RadioButton radioButtonViewIsometryFigure;
@@ -603,14 +768,25 @@
         private System.Windows.Forms.Button buttonMoveUp;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.GroupBox groupBoxMovePlane;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBoxRotatePlane;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.GroupBox groupBoxScalePlane;
         private System.Windows.Forms.Button buttonMoveRightPlane;
         private System.Windows.Forms.Button buttonMoveDownPlane;
         private System.Windows.Forms.Button buttonMoveLeftPlane;
         private System.Windows.Forms.Button buttonMoveUpPlane;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.DataGridView dataGridViewPlane;
+        private System.Windows.Forms.PictureBox pictureBoxPlane;
+        private System.Windows.Forms.Button buttonScaleDecreasePlane;
+        private System.Windows.Forms.Button buttonScaleIncreasePlane;
+        private System.Windows.Forms.TrackBar trackBarRotateOZPlane;
+        private System.Windows.Forms.TrackBar trackBarRotateOYPlane;
+        private System.Windows.Forms.TrackBar trackBarRotateOXPlane;
+        private System.Windows.Forms.Label labelRotateOZPlane;
+        private System.Windows.Forms.Label labelRotateOYPlane;
+        private System.Windows.Forms.Label labelRotateOXPlane;
+        private System.Windows.Forms.Button buttonResetPlane;
+        private System.Windows.Forms.Button buttonLineColorPlane;
+        private System.Windows.Forms.Button buttonBackgroundColorPlane;
     }
 }

@@ -6,7 +6,8 @@ namespace Lab3.Figures
 {
     class Cylinder : IFigure
     {
-        protected float radius;
+        private float radius;
+        private int lineStep = 5;
 
         public Cylinder(Point3D centerCircle1, Point3D centerCircle2, float radius)
         {
@@ -42,6 +43,14 @@ namespace Lab3.Figures
 
         public override void DrawXY(Pen pen1, Pen pen2, PaintEventArgs e)
         {
+            int j = pointsLength / 2;
+            for (int i = 0; i < pointsLength / 2; i += lineStep)
+            {
+
+                e.Graphics.DrawLine(Pens.Green, points[i].X, points[i].Y, points[j].X, points[j].Y);
+                j += lineStep;
+            }
+
             for (int i = 0; i < pointsLength - 1; i++)
             {
                 if (i == pointsLength / 2 - 1)
@@ -51,20 +60,20 @@ namespace Lab3.Figures
                 e.Graphics.DrawLine(pen1, points[i].X, points[i].Y, points[i + 1].X, points[i + 1].Y);
             }
 
-            e.Graphics.DrawLine(pen1, points[0].X, points[0].Y, points[49].X, points[49].Y);
-            e.Graphics.DrawLine(pen1, points[50].X, points[50].Y, points[99].X, points[99].Y);
-
-            int j = 50;
-            for (int i = 0; i < pointsLength / 2; i += 5)
-            {
-
-                e.Graphics.DrawLine(pen2, points[i].X, points[i].Y, points[j].X, points[j].Y);
-                j += 5;
-            }
+            e.Graphics.DrawLine(pen1, points[0].X, points[0].Y, points[pointsLength / 2 - 1].X, points[pointsLength / 2 - 1].Y);
+            e.Graphics.DrawLine(pen1, points[pointsLength / 2].X, points[pointsLength / 2].Y, points[pointsLength - 1].X, points[pointsLength - 1].Y);
         }
 
         public override void DrawXZ(Pen pen1, Pen pen2, PaintEventArgs e)
         {
+            int j = pointsLength / 2;
+            for (int i = 0; i < pointsLength / 2; i += lineStep)
+            {
+
+                e.Graphics.DrawLine(Pens.Green, points[i].X, points[i].Z, points[j].X, points[j].Z);
+                j += lineStep;
+            }
+
             for (int i = 0; i < pointsLength - 1; i++)
             {
                 if (i == pointsLength / 2 - 1)
@@ -76,18 +85,18 @@ namespace Lab3.Figures
 
             e.Graphics.DrawLine(pen1, points[0].X, points[0].Z, points[pointsLength / 2 - 1].X, points[pointsLength / 2 - 1].Z);
             e.Graphics.DrawLine(pen1, points[pointsLength / 2].X, points[pointsLength / 2].Z, points[pointsLength - 1].X, points[pointsLength - 1].Z);
-
-            int j = 50;
-            for (int i = 0; i < pointsLength / 2; i += 5)
-            {
-
-                e.Graphics.DrawLine(Pens.Green, points[i].X, points[i].Z, points[j].X, points[j].Z);
-                j += 5;
-            }
         }
 
         public override void DrawYZ(Pen pen1, Pen pen2, PaintEventArgs e)
         {
+            int j = pointsLength / 2;
+            for (int i = 0; i < pointsLength / 2; i += lineStep)
+            {
+
+                e.Graphics.DrawLine(Pens.Green, points[i].X, points[i].Z, points[j].X, points[j].Z);
+                j += lineStep;
+            }
+
             for (int i = 0; i < pointsLength - 1; i++)
             {
                 if (i == pointsLength / 2 - 1)
@@ -97,21 +106,25 @@ namespace Lab3.Figures
                 e.Graphics.DrawLine(pen1, points[i].Y, points[i].Z, points[i + 1].Y, points[i + 1].Z);
             }
 
-            e.Graphics.DrawLine(pen1, points[0].Y, points[0].Z, points[49].Y, points[49].Z);
-            e.Graphics.DrawLine(pen1, points[50].Y, points[50].Z, points[99].Y, points[99].Z);
-
-            int j = 50;
-            for (int i = 0; i < pointsLength / 2; i += 5)
-            {
-
-                e.Graphics.DrawLine(pen2, points[i].Y, points[i].Z, points[j].Y, points[j].Z);
-                j += 5;
-            }
+            e.Graphics.DrawLine(pen1, points[0].Y, points[0].Z, points[pointsLength / 2 - 1].Y, points[pointsLength / 2 - 1].Z);
+            e.Graphics.DrawLine(pen1, points[pointsLength / 2].Y, points[pointsLength / 2].Z, points[pointsLength - 1].Y, points[pointsLength - 1].Z);
         }
 
         public override void DrawIsometry(Pen pen1, Pen pen2, PaintEventArgs e)
         {
-            points = AffineCalculations3D.ToIsometry(points);
+            if (!isometry)
+            {
+                points = AffineCalculations3D.ToIsometry(points, center);
+                isometry = true;
+            }
+
+            int j = pointsLength / 2;
+            for (int i = 0; i < pointsLength / 2; i += lineStep)
+            {
+
+                e.Graphics.DrawLine(Pens.Green, points[i].X, points[i].Y, points[j].X, points[j].Y);
+                j += lineStep;
+            }
 
             for (int i = 0; i < pointsLength - 1; i++)
             {
@@ -122,16 +135,8 @@ namespace Lab3.Figures
                 e.Graphics.DrawLine(pen1, points[i].X, points[i].Y, points[i + 1].X, points[i + 1].Y);
             }
 
-            e.Graphics.DrawLine(pen1, points[0].X, points[0].Y, points[49].X, points[49].Y);
-            e.Graphics.DrawLine(pen1, points[50].X, points[50].Y, points[99].X, points[99].Y);
-
-            int j = 50;
-            for (int i = 0; i < pointsLength / 2; i += 5)
-            {
-
-                e.Graphics.DrawLine(pen2, points[i].X, points[i].Y, points[j].X, points[j].Y);
-                j += 5;
-            }
+            e.Graphics.DrawLine(pen1, points[0].X, points[0].Y, points[pointsLength / 2 - 1].X, points[pointsLength / 2 - 1].Y);
+            e.Graphics.DrawLine(pen1, points[pointsLength / 2].X, points[pointsLength / 2].Y, points[pointsLength - 1].X, points[pointsLength - 1].Y);
         }
 
     }
