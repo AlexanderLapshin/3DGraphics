@@ -55,29 +55,17 @@ namespace Lab3.Figures
         {
             switch (direction)
             {
-                case Constants.OXLEFT:
+                case Constants.OX:
                     AffineCalculations3D.RotateX(points, center, angle - angleX);
-                    angleX++
+                    angleX = angle;
                     break;
-                case Constants.OXRIGHT:
-                    angleX--;
-                    AffineCalculations3D.RotateX(points, center, -1);
+                case Constants.OY:
+                    AffineCalculations3D.RotateY(points, center, angle - angleY);
+                    angleY = angle;
                     break;
-                case Constants.OYLEFT:
-                    angleY++;
-                    AffineCalculations3D.RotateY(points, center, 1);
-                    break;
-                case Constants.OYRIGHT:
-                    angleY--;
-                    AffineCalculations3D.RotateY(points, center, -1);
-                    break;
-                case Constants.OZLEFT:
-                    angleZ++;
-                    AffineCalculations3D.RotateZ(points, center, 1);
-                    break;
-                case Constants.OZRIGHT:
-                    angleZ--;
-                    AffineCalculations3D.RotateZ(points, center, -1);
+                case Constants.OZ:
+                    AffineCalculations3D.RotateZ(points, center, angle - angleZ);
+                    angleZ = angle;
                     break;
             }
         }
