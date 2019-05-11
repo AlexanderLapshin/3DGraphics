@@ -30,11 +30,11 @@ namespace Lab3
             }
             else if (radioButtonViewAboveFigure.Checked)
             {
-                cylinder.DrawXZ(MainPen, SecondaryPen, e);
+                cylinder.DrawYZ(MainPen, SecondaryPen, e);
             }
             else if (radioButtonViewSideFigure.Checked)
             {
-                cylinder.DrawYZ(MainPen, SecondaryPen, e);
+                cylinder.DrawXZ(MainPen, SecondaryPen, e);
             }
             else if (radioButtonViewIsometryFigure.Checked)
             {
@@ -201,7 +201,22 @@ namespace Lab3
             pictureBoxFigure.Refresh();
         }
 
-
+        private void trackBarAllAxisFigure_Scroll(object sender, EventArgs e)
+        {
+            if (checkBoxRotateOXFigure.Checked)
+            {
+                cylinder.Rotate(Constants.OX, trackBarAllAxisFigure.Value);
+            }
+            if (checkBoxRotateOYFigure.Checked)
+            {
+                cylinder.Rotate(Constants.OY, trackBarAllAxisFigure.Value);
+            }
+            if (checkBoxRotateOZFigure.Checked)
+            {
+                cylinder.Rotate(Constants.OZ, trackBarAllAxisFigure.Value);
+            }
+            pictureBoxFigure.Refresh();
+        }
 
         //###########
         // Plane Code
@@ -215,6 +230,7 @@ namespace Lab3
                 pictureBoxPlane.BackColor = colorDialog1.Color;
             }
         }
+
 
     }
 }

@@ -6,7 +6,7 @@ namespace Lab3.Figures
     abstract class IFigure
     {
         protected Point3D[] points;
-        protected Point3D[] pointsToDraw;
+        protected PointF[] pointsToDraw;
         protected int pointsLength;
         protected Point3D center = new Point3D();
         protected int angleX = 0;
@@ -43,8 +43,6 @@ namespace Lab3.Figures
 
         public virtual void DrawIsometry(Pen pen1, Pen pen2, PaintEventArgs e)
         {
-            points = AffineCalculations3D.ToIsometry(points, center);
-
             for (int i = 0; i < pointsLength - 1; i++)
             {
                 e.Graphics.DrawLine(pen1, points[i].X, points[i].Y, points[i + 1].X, points[i + 1].Y);
