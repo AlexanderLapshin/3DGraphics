@@ -2,35 +2,36 @@
 
 namespace Lab3
 {
-    class AffineCalculations3D
+    static class AffineCalculations3D
     {
         const int matrixSize = 4;
 
         public static Point3D[] ToIsometry(Point3D[] points, Point3D center)
         {
+            Point3D[] newPoints = new Point3D[points.Length];
+            for (int i = 0; i < newPoints.Length; i++)
+            {
+                newPoints[i] = new Point3D();
+            }
+
+
             float[,] IsometryMatrix = new float[matrixSize, matrixSize] { {0.707f, -0.408f, 0, 0 },
                                                                           {0, 0.816f, 0, 0 },
-                                                                          {-0.707f,  0.408f, 1, 0 },
+                                                                          {-0.707f,  -0.408f, 1, 0 },
                                                                           {0, 0, 0, 1 }};
 
             // Transform
             for (int i = 0; i < points.Length; i++)
             {
                 float[] Vector = new float[matrixSize] { points[i].X, points[i].Y, points[i].Z, 1 };
-                Vector = MatrixOnVector(IsometryMatrix, Vector);
-                points[i].X = Vector[0];
-                points[i].Y = Vector[1];
-                points[i].Z = Vector[2];
+                Vector = MatrixOnVector2(IsometryMatrix, Vector);
+                newPoints[i].X = Vector[0] + 200;
+                newPoints[i].Y = Math.Abs(Vector[1]);
+                newPoints[i].Z = Vector[2];
             }
 
-            // Transform center
-            float[] Vector2 = new float[matrixSize] { center.X, center.Y, center.Z, 1 };
-            Vector2 = MatrixOnVector(IsometryMatrix, Vector2);
-            center.X = Vector2[0];
-            center.Y = Vector2[1];
-            center.Z = Vector2[2];
 
-            return points;
+            return newPoints;
         }
 
         public static Point3D[] Move(Point3D[] points, float x, float y, float z)
@@ -187,6 +188,23 @@ namespace Lab3
                 for (int j = 0; j < matrixSize; j++)
                 {
                     Sum += Vector[j] * Matrix[i, j];
+                }
+                NewVector[i] = Sum;
+            }
+
+            return NewVector;
+        }
+
+        private static float[] MatrixOnVector2(float[,] Matrix, float[] Vector)
+        {
+            float[] NewVector = new float[matrixSize];
+
+            for (int i = 0; i < matrixSize; i++)
+            {
+                float Sum = 0;
+                for (int j = 0; j < matrixSize; j++)
+                {
+                    Sum += Vector[j] * Matrix[j, i];
                 }
                 NewVector[i] = Sum;
             }

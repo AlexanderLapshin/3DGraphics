@@ -215,5 +215,6 @@ namespace Lab3
                 pictureBoxPlane.BackColor = colorDialog1.Color;
             }
         }
+
     }
 }

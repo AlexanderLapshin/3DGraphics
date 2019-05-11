@@ -6,13 +6,13 @@ namespace Lab3.Figures
     abstract class IFigure
     {
         protected Point3D[] points;
+        protected Point3D[] pointsToDraw;
         protected int pointsLength;
         protected Point3D center = new Point3D();
         protected int angleX = 0;
         protected int angleY = 0;
         protected int angleZ = 0;
         protected int moveStep = 10;
-        protected bool isometry = false;
 
         public virtual void DrawXY(Pen pen1, Pen pen2, PaintEventArgs e)
         {

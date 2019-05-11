@@ -93,7 +93,7 @@ namespace Lab3.Figures
             for (int i = 0; i < pointsLength / 2; i += lineStep)
             {
 
-                e.Graphics.DrawLine(Pens.Green, points[i].X, points[i].Z, points[j].X, points[j].Z);
+                e.Graphics.DrawLine(Pens.Green, points[i].Y, points[i].Z, points[j].Y, points[j].Z);
                 j += lineStep;
             }
 
@@ -112,17 +112,13 @@ namespace Lab3.Figures
 
         public override void DrawIsometry(Pen pen1, Pen pen2, PaintEventArgs e)
         {
-            if (!isometry)
-            {
-                points = AffineCalculations3D.ToIsometry(points, center);
-                isometry = true;
-            }
+            pointsToDraw = AffineCalculations3D.ToIsometry(points, center);
 
             int j = pointsLength / 2;
             for (int i = 0; i < pointsLength / 2; i += lineStep)
             {
 
-                e.Graphics.DrawLine(Pens.Green, points[i].X, points[i].Y, points[j].X, points[j].Y);
+                e.Graphics.DrawLine(Pens.Green, pointsToDraw[i].X, pointsToDraw[i].Y, pointsToDraw[j].X, pointsToDraw[j].Y);
                 j += lineStep;
             }
 
@@ -132,11 +128,11 @@ namespace Lab3.Figures
                 {
                     continue;
                 }
-                e.Graphics.DrawLine(pen1, points[i].X, points[i].Y, points[i + 1].X, points[i + 1].Y);
+                e.Graphics.DrawLine(pen1, pointsToDraw[i].X, pointsToDraw[i].Y, pointsToDraw[i + 1].X, pointsToDraw[i + 1].Y);
             }
 
-            e.Graphics.DrawLine(pen1, points[0].X, points[0].Y, points[pointsLength / 2 - 1].X, points[pointsLength / 2 - 1].Y);
-            e.Graphics.DrawLine(pen1, points[pointsLength / 2].X, points[pointsLength / 2].Y, points[pointsLength - 1].X, points[pointsLength - 1].Y);
+            e.Graphics.DrawLine(pen1, pointsToDraw[0].X, pointsToDraw[0].Y, pointsToDraw[pointsLength / 2 - 1].X, pointsToDraw[pointsLength / 2 - 1].Y);
+            e.Graphics.DrawLine(pen1, pointsToDraw[pointsLength / 2].X, pointsToDraw[pointsLength / 2].Y, pointsToDraw[pointsLength - 1].X, pointsToDraw[pointsLength - 1].Y);
         }
 
     }
