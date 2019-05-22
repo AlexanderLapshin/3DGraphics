@@ -84,10 +84,10 @@
             this.buttonMoveDownPlane = new System.Windows.Forms.Button();
             this.buttonMoveLeftPlane = new System.Windows.Forms.Button();
             this.groupBoxViewPlane = new System.Windows.Forms.GroupBox();
-            this.radioButton = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButtonIsometryViewPlane = new System.Windows.Forms.RadioButton();
+            this.radioButtonSideViewPlane = new System.Windows.Forms.RadioButton();
+            this.radioButtonAboveViewPlane = new System.Windows.Forms.RadioButton();
+            this.radioButtonFrontViewPlane = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.numericUpDownZPlane = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownYPlane = new System.Windows.Forms.NumericUpDown();
@@ -564,6 +564,7 @@
             this.trackBarAllAxisPlane.TabIndex = 9;
             this.trackBarAllAxisPlane.TickFrequency = 30;
             this.trackBarAllAxisPlane.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.trackBarAllAxisPlane.Scroll += new System.EventHandler(this.trackBarAllAxisPlane_Scroll);
             // 
             // trackBarRotateOXPlane
             // 
@@ -575,6 +576,7 @@
             this.trackBarRotateOXPlane.TabIndex = 0;
             this.trackBarRotateOXPlane.TickFrequency = 30;
             this.trackBarRotateOXPlane.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.trackBarRotateOXPlane.Scroll += new System.EventHandler(this.trackBarRotateOXPlane_Scroll);
             // 
             // checkBoxRotateOZPlane
             // 
@@ -634,6 +636,7 @@
             this.trackBarRotateOYPlane.TabIndex = 1;
             this.trackBarRotateOYPlane.TickFrequency = 30;
             this.trackBarRotateOYPlane.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.trackBarRotateOYPlane.Scroll += new System.EventHandler(this.trackBarRotateOYPlane_Scroll);
             // 
             // trackBarRotateOZPlane
             // 
@@ -645,6 +648,7 @@
             this.trackBarRotateOZPlane.TabIndex = 2;
             this.trackBarRotateOZPlane.TickFrequency = 30;
             this.trackBarRotateOZPlane.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.trackBarRotateOZPlane.Scroll += new System.EventHandler(this.trackBarRotateOZPlane_Scroll);
             // 
             // labelRotateOZPlane
             // 
@@ -679,6 +683,7 @@
             this.buttonScaleDecreasePlane.TabIndex = 1;
             this.buttonScaleDecreasePlane.Text = "Decrease";
             this.buttonScaleDecreasePlane.UseVisualStyleBackColor = true;
+            this.buttonScaleDecreasePlane.Click += new System.EventHandler(this.buttonScaleDecreasePlane_Click);
             // 
             // buttonScaleIncreasePlane
             // 
@@ -690,6 +695,7 @@
             this.buttonScaleIncreasePlane.TabIndex = 0;
             this.buttonScaleIncreasePlane.Text = "Increase";
             this.buttonScaleIncreasePlane.UseVisualStyleBackColor = true;
+            this.buttonScaleIncreasePlane.Click += new System.EventHandler(this.buttonScaleIncreasePlane_Click);
             // 
             // buttonBackgroundColorPlane
             // 
@@ -760,6 +766,7 @@
             this.buttonMoveRightPlane.TabIndex = 1;
             this.buttonMoveRightPlane.Text = "Right";
             this.buttonMoveRightPlane.UseVisualStyleBackColor = false;
+            this.buttonMoveRightPlane.Click += new System.EventHandler(this.buttonMoveRightPlane_Click);
             // 
             // buttonMoveUpPlane
             // 
@@ -771,6 +778,7 @@
             this.buttonMoveUpPlane.TabIndex = 0;
             this.buttonMoveUpPlane.Text = "Up";
             this.buttonMoveUpPlane.UseVisualStyleBackColor = true;
+            this.buttonMoveUpPlane.Click += new System.EventHandler(this.buttonMoveUpPlane_Click);
             // 
             // buttonMoveDownPlane
             // 
@@ -782,6 +790,7 @@
             this.buttonMoveDownPlane.TabIndex = 3;
             this.buttonMoveDownPlane.Text = "Down";
             this.buttonMoveDownPlane.UseVisualStyleBackColor = true;
+            this.buttonMoveDownPlane.Click += new System.EventHandler(this.buttonMoveDownPlane_Click);
             // 
             // buttonMoveLeftPlane
             // 
@@ -793,13 +802,14 @@
             this.buttonMoveLeftPlane.TabIndex = 2;
             this.buttonMoveLeftPlane.Text = "Left";
             this.buttonMoveLeftPlane.UseVisualStyleBackColor = true;
+            this.buttonMoveLeftPlane.Click += new System.EventHandler(this.buttonMoveLeftPlane_Click);
             // 
             // groupBoxViewPlane
             // 
-            this.groupBoxViewPlane.Controls.Add(this.radioButton);
-            this.groupBoxViewPlane.Controls.Add(this.radioButton3);
-            this.groupBoxViewPlane.Controls.Add(this.radioButton2);
-            this.groupBoxViewPlane.Controls.Add(this.radioButton1);
+            this.groupBoxViewPlane.Controls.Add(this.radioButtonIsometryViewPlane);
+            this.groupBoxViewPlane.Controls.Add(this.radioButtonSideViewPlane);
+            this.groupBoxViewPlane.Controls.Add(this.radioButtonAboveViewPlane);
+            this.groupBoxViewPlane.Controls.Add(this.radioButtonFrontViewPlane);
             this.groupBoxViewPlane.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxViewPlane.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBoxViewPlane.ForeColor = System.Drawing.Color.RoyalBlue;
@@ -810,47 +820,51 @@
             this.groupBoxViewPlane.TabStop = false;
             this.groupBoxViewPlane.Text = "View";
             // 
-            // radioButton
+            // radioButtonIsometryViewPlane
             // 
-            this.radioButton.AutoSize = true;
-            this.radioButton.Location = new System.Drawing.Point(170, 55);
-            this.radioButton.Name = "radioButton";
-            this.radioButton.Size = new System.Drawing.Size(85, 20);
-            this.radioButton.TabIndex = 3;
-            this.radioButton.Text = "Isometry";
-            this.radioButton.UseVisualStyleBackColor = true;
+            this.radioButtonIsometryViewPlane.AutoSize = true;
+            this.radioButtonIsometryViewPlane.Location = new System.Drawing.Point(170, 55);
+            this.radioButtonIsometryViewPlane.Name = "radioButtonIsometryViewPlane";
+            this.radioButtonIsometryViewPlane.Size = new System.Drawing.Size(85, 20);
+            this.radioButtonIsometryViewPlane.TabIndex = 3;
+            this.radioButtonIsometryViewPlane.Text = "Isometry";
+            this.radioButtonIsometryViewPlane.UseVisualStyleBackColor = true;
+            this.radioButtonIsometryViewPlane.CheckedChanged += new System.EventHandler(this.radioButtonIsometryViewPlane_CheckedChanged);
             // 
-            // radioButton3
+            // radioButtonSideViewPlane
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(50, 55);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(58, 20);
-            this.radioButton3.TabIndex = 2;
-            this.radioButton3.Text = "Side";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButtonSideViewPlane.AutoSize = true;
+            this.radioButtonSideViewPlane.Location = new System.Drawing.Point(50, 55);
+            this.radioButtonSideViewPlane.Name = "radioButtonSideViewPlane";
+            this.radioButtonSideViewPlane.Size = new System.Drawing.Size(58, 20);
+            this.radioButtonSideViewPlane.TabIndex = 2;
+            this.radioButtonSideViewPlane.Text = "Side";
+            this.radioButtonSideViewPlane.UseVisualStyleBackColor = true;
+            this.radioButtonSideViewPlane.CheckedChanged += new System.EventHandler(this.radioButtonSideViewPlane_CheckedChanged);
             // 
-            // radioButton2
+            // radioButtonAboveViewPlane
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(170, 30);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(110, 20);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.Text = "From Above";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButtonAboveViewPlane.AutoSize = true;
+            this.radioButtonAboveViewPlane.Location = new System.Drawing.Point(170, 30);
+            this.radioButtonAboveViewPlane.Name = "radioButtonAboveViewPlane";
+            this.radioButtonAboveViewPlane.Size = new System.Drawing.Size(110, 20);
+            this.radioButtonAboveViewPlane.TabIndex = 1;
+            this.radioButtonAboveViewPlane.Text = "From Above";
+            this.radioButtonAboveViewPlane.UseVisualStyleBackColor = true;
+            this.radioButtonAboveViewPlane.CheckedChanged += new System.EventHandler(this.radioButtonAboveViewPlane_CheckedChanged);
             // 
-            // radioButton1
+            // radioButtonFrontViewPlane
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(50, 30);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(61, 20);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Front";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButtonFrontViewPlane.AutoSize = true;
+            this.radioButtonFrontViewPlane.Checked = true;
+            this.radioButtonFrontViewPlane.Location = new System.Drawing.Point(50, 30);
+            this.radioButtonFrontViewPlane.Name = "radioButtonFrontViewPlane";
+            this.radioButtonFrontViewPlane.Size = new System.Drawing.Size(61, 20);
+            this.radioButtonFrontViewPlane.TabIndex = 0;
+            this.radioButtonFrontViewPlane.TabStop = true;
+            this.radioButtonFrontViewPlane.Text = "Front";
+            this.radioButtonFrontViewPlane.UseVisualStyleBackColor = true;
+            this.radioButtonFrontViewPlane.CheckedChanged += new System.EventHandler(this.radioButtonFrontViewPlane_CheckedChanged);
             // 
             // groupBox1
             // 
@@ -1009,6 +1023,7 @@
             this.pictureBoxPlane.Size = new System.Drawing.Size(716, 510);
             this.pictureBoxPlane.TabIndex = 0;
             this.pictureBoxPlane.TabStop = false;
+            this.pictureBoxPlane.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxPlane_Paint);
             // 
             // Form1
             // 
@@ -1131,9 +1146,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RadioButton radioButton;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioButtonIsometryViewPlane;
+        private System.Windows.Forms.RadioButton radioButtonSideViewPlane;
+        private System.Windows.Forms.RadioButton radioButtonAboveViewPlane;
+        private System.Windows.Forms.RadioButton radioButtonFrontViewPlane;
     }
 }
