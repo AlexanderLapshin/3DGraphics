@@ -15,9 +15,11 @@ namespace Lab3
 
         // Plane data
         Bezier bezier;
-        Point3D[,] bezierPoints;
+        Point3D[] bezierPoints;
         int size = 4;
+        int pointsLength = 16;
         bool updatingData = true;
+        Pen MainPenPlain = new Pen(Color.Blue, 2);
 
         public Form1()
         {
@@ -34,18 +36,18 @@ namespace Lab3
             dataGridViewPlane.ColumnCount = size;
             dataGridViewPlane.RowCount = size;
 
-            numericUpDownXPlane.Value = height;
-            numericUpDownYPlane.Value = width;
-            numericUpDownZPlane.Value = 0;
+            numericUpDownXPlane.Value = width;
+            numericUpDownYPlane.Value = z;
+            numericUpDownZPlane.Value = height;
 
-            bezierPoints = new Point3D[size, size];
+            bezierPoints = new Point3D[pointsLength];
 
             for (int i = 0; i < size; i++)
             {
                 for (int j = 0; j < size; j++)
                 {
                     dataGridViewPlane.Rows[i].Cells[j].Value = string.Format("({0};{1};{2})", width, z, height);
-                    bezierPoints[i, j] = new Point3D(width, z, height);
+                    bezierPoints[i * 4 + j] = new Point3D(width, z, height);
                     width += 50;
                 }
                 width = 200;
@@ -256,32 +258,23 @@ namespace Lab3
         //###########
 
 
-        private void buttonBackgroundColorPlane_Click(object sender, EventArgs e)
-        {
-            DialogResult result = colorDialog1.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                pictureBoxPlane.BackColor = colorDialog1.Color;
-            }
-        }
-
         private void pictureBoxPlane_Paint(object sender, PaintEventArgs e)
         {
             if (radioButtonFrontViewPlane.Checked)
             {
-                bezier.DrawXY(Pens.Red, Pens.Blue, e);
+                bezier.DrawXY(Pens.Red, MainPenPlain, e);
             }
             else if (radioButtonAboveViewPlane.Checked)
             {
-                bezier.DrawYZ(Pens.Red, Pens.Blue, e);
+                bezier.DrawYZ(Pens.Red, MainPenPlain, e);
             }
             else if (radioButtonSideViewPlane.Checked)
             {
-                bezier.DrawXZ(Pens.Red, Pens.Blue, e);
+                bezier.DrawXZ(Pens.Red, MainPenPlain, e);
             }
             else if (radioButtonIsometryViewPlane.Checked)
             {
-                bezier.DrawIsometry(Pens.Red, Pens.Blue, e);
+                bezier.DrawIsometry(Pens.Red, MainPenPlain, e);
             }
         }
 
@@ -324,7 +317,7 @@ namespace Lab3
                 for (int j = 0; j < size; j++)
                 {
                     dataGridViewPlane.Rows[i].Cells[j].Value = string.Format("({0};{1};{2})", width, height, z);
-                    bezierPoints[i, j] = new Point3D(width, height, z);
+                    bezierPoints[i * 4 + j] = new Point3D(width, height, z);
                     width += 50;
                 }
                 width = 200;
@@ -350,6 +343,9 @@ namespace Lab3
             {
                 bezier.Move(Constants.BACK);
             }
+            bezierPoints = bezier.points;
+            setGridPoints();
+
             pictureBoxPlane.Refresh();
         }
 
@@ -371,6 +367,9 @@ namespace Lab3
             {
                 bezier.Move(Constants.FORWARD);
             }
+            bezierPoints = bezier.points;
+            setGridPoints();
+
             pictureBoxPlane.Refresh();
         }
 
@@ -392,6 +391,9 @@ namespace Lab3
             {
                 bezier.Move(Constants.RIGHT);
             }
+            bezierPoints = bezier.points;
+            setGridPoints();
+
             pictureBoxPlane.Refresh();
         }
 
@@ -413,7 +415,21 @@ namespace Lab3
             {
                 bezier.Move(Constants.LEFT);
             }
+            bezierPoints = bezier.points;
+            setGridPoints();
+
             pictureBoxPlane.Refresh();
+        }
+
+        private void setGridPoints()
+        {
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    dataGridViewPlane.Rows[i].Cells[j].Value = string.Format("({0};{1};{2})", Math.Round(bezierPoints[i * 4 + j].X), Math.Round(bezierPoints[i * 4 + j].Y), Math.Round(bezierPoints[i * 4 + j].Z));
+                }
+            }
         }
 
         private void dataGridViewPlane_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -510,44 +526,54 @@ namespace Lab3
 
         private void UpdateBezier()
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < size; i++)
             {
-                for (int j = 0; j < 4; j++)
+                for (int j = 0; j < size; j++)
                 {
-                    bezierPoints[i, j] = GetPointFromCurrentCell(i, j);
+                    bezierPoints[i * 4 + j] = GetPointFromCurrentCell(i, j);
                 }
             }
 
-            bezier = new Bezier(bezierPoints);
+            bezier.points = bezierPoints;
         }
 
         private void buttonScaleIncreasePlane_Click(object sender, EventArgs e)
         {
             bezier.Increase();
+            bezierPoints = bezier.points;
+            setGridPoints();
             pictureBoxPlane.Refresh();
         }
 
         private void buttonScaleDecreasePlane_Click(object sender, EventArgs e)
         {
             bezier.Decrease();
+            bezierPoints = bezier.points;
+            setGridPoints();
             pictureBoxPlane.Refresh();
         }
 
         private void trackBarRotateOXPlane_Scroll(object sender, EventArgs e)
         {
             bezier.Rotate(Constants.OX, trackBarRotateOXPlane.Value);
+            bezierPoints = bezier.points;
+            setGridPoints();
             pictureBoxPlane.Refresh();
         }
 
         private void trackBarRotateOYPlane_Scroll(object sender, EventArgs e)
         {
             bezier.Rotate(Constants.OY, trackBarRotateOYPlane.Value);
+            bezierPoints = bezier.points;
+            setGridPoints();
             pictureBoxPlane.Refresh();
         }
 
         private void trackBarRotateOZPlane_Scroll(object sender, EventArgs e)
         {
             bezier.Rotate(Constants.OZ, trackBarRotateOZPlane.Value);
+            bezierPoints = bezier.points;
+            setGridPoints();
             pictureBoxPlane.Refresh();
         }
 
@@ -565,6 +591,55 @@ namespace Lab3
             {
                 bezier.Rotate(Constants.OZ, trackBarAllAxisPlane.Value);
             }
+            bezierPoints = bezier.points;
+            setGridPoints();
+            pictureBoxPlane.Refresh();
+        }
+
+        private void buttonBackgroundColorPlane_Click_1(object sender, EventArgs e)
+        {
+            DialogResult result = colorDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                pictureBoxPlane.BackColor = colorDialog1.Color;
+            }
+        }
+
+        private void buttonLineColorPlane_Click(object sender, EventArgs e)
+        {
+            DialogResult result = colorDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                MainPenPlain.Color = colorDialog1.Color;
+            }
+            pictureBoxPlane.Refresh();
+        }
+
+        private void buttonResetPlane_Click(object sender, EventArgs e)
+        {
+            int height = 200;
+            int width = 200;
+            int z = 50;
+            updatingData = true;
+
+            numericUpDownXPlane.Value = width;
+            numericUpDownYPlane.Value = z;
+            numericUpDownZPlane.Value = height;
+
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    dataGridViewPlane.Rows[i].Cells[j].Value = string.Format("({0};{1};{2})", width, z, height);
+                    bezierPoints[i * 4 + j] = new Point3D(width, z, height);
+                    width += 50;
+                }
+                width = 200;
+                height += 50;
+            }
+
+            bezier = new Bezier(bezierPoints);
+            updatingData = false;
             pictureBoxPlane.Refresh();
         }
     }

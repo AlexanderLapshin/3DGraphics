@@ -10,7 +10,7 @@ namespace Lab3
         private const int size = 4;
         private double period = 0.02;
         private const int pointsDrawLength = 50;
-        private Point3D[] points = new Point3D[pointsLength];
+        public Point3D[] points = new Point3D[pointsLength];
         private Point3D[] tmpPoints = new Point3D[2500];
         private PointF[] pointsToDraw = new PointF[2500];
         private PointF[] mainPointsToDraw = new PointF[pointsLength];
@@ -20,28 +20,23 @@ namespace Lab3
         protected int angleZ = 0;
         protected int moveStep = 10;
 
-
-        private double S;
         private float[,] Mb = new float[4, 4] { {-1, 3, -3, 1},
                                                       {3, -6, 3, 0},
                                                       {-3, 3, 0, 0},
                                                       {1, 0, 0, 0 } };
 
-        public Bezier(Point3D[,] points)
+        public Bezier(Point3D[] points)
         {
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < pointsLength; i++)
             {
-                for (int j = 0; j < size; j++)
-                {
-                    this.points[i * 4 + j] = new Point3D();
-                    this.points[i * 4 + j].X = points[i, j].X;
-                    this.points[i * 4 + j].Y = points[i, j].Y;
-                    this.points[i * 4 + j].Z = points[i, j].Z;
-                    mainPointsToDraw[i * 4 + j] = new PointF();
-                }
+                this.points[i] = new Point3D();
+                this.points[i].X = points[i].X;
+                this.points[i].Y = points[i].Y;
+                this.points[i].Z = points[i].Z;
+                mainPointsToDraw[i] = new PointF();
             }
 
-            center = new Point3D((points[0, 3].X + points[0, 0].X) / 2, (points[3, 0].Y + points[0, 0].Y) / 2, points[0, 0].Z);
+            center = new Point3D((points[3].X + points[0].X) / 2, points[0].Y, (points[12].Z + points[0].Z) / 2);
         }
 
         private void ToBezier()

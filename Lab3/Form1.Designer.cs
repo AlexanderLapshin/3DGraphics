@@ -710,6 +710,7 @@
             this.buttonBackgroundColorPlane.TabIndex = 7;
             this.buttonBackgroundColorPlane.Text = "Background Color";
             this.buttonBackgroundColorPlane.UseVisualStyleBackColor = false;
+            this.buttonBackgroundColorPlane.Click += new System.EventHandler(this.buttonBackgroundColorPlane_Click_1);
             // 
             // buttonLineColorPlane
             // 
@@ -724,6 +725,7 @@
             this.buttonLineColorPlane.TabIndex = 6;
             this.buttonLineColorPlane.Text = "Line Color";
             this.buttonLineColorPlane.UseVisualStyleBackColor = false;
+            this.buttonLineColorPlane.Click += new System.EventHandler(this.buttonLineColorPlane_Click);
             // 
             // buttonResetPlane
             // 
@@ -738,7 +740,7 @@
             this.buttonResetPlane.TabIndex = 5;
             this.buttonResetPlane.Text = "Reset";
             this.buttonResetPlane.UseVisualStyleBackColor = false;
-            this.buttonResetPlane.Click += new System.EventHandler(this.buttonBackgroundColorPlane_Click);
+            this.buttonResetPlane.Click += new System.EventHandler(this.buttonResetPlane_Click);
             // 
             // groupBoxMovePlane
             // 
