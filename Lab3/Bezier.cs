@@ -111,11 +111,11 @@ namespace Lab3
 
             for (int i = 0; i < pointsToDraw.Length; i++)
             {
-                e.Graphics.DrawEllipse(pen2, pointsToDraw[i].X, pointsToDraw[i].Y, 4, 4);
+                e.Graphics.DrawEllipse(pen2, pointsToDraw[i].X, pointsToDraw[i].Y, 2, 2);
             }
             for (int i = 0; i < mainPointsToDraw.Length; i++)
             {
-                e.Graphics.DrawEllipse(pen1, mainPointsToDraw[i].X, mainPointsToDraw[i].Y, 6, 6);
+                e.Graphics.DrawEllipse(pen1, mainPointsToDraw[i].X, mainPointsToDraw[i].Y, 3, 3);
             }
         }
 
